@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header list={list} setList={setList} onSearch={onSearch} handleSearch={handleSearch} />
+      <Header onSearch={onSearch} handleSearch={handleSearch} />
       <ListingsContainer list={list} setList={setList} onSearch={onSearch} />
     </div>
   );

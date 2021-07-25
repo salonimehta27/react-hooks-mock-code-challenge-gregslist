@@ -1,7 +1,7 @@
 import React from "react";
 import Search from "./Search";
 
-function Header({ list, setList, onSearch, handleSearch }) {
+function Header({ onSearch, handleSearch }) {
 
   return (
     <header>
@@ -13,8 +13,7 @@ function Header({ list, setList, onSearch, handleSearch }) {
       </h1>
       <Search onSearch={onSearch}
         handleSearch={handleSearch}
-        list={list}
-        setList={setList} />
+      />
     </header>
   );
 }
