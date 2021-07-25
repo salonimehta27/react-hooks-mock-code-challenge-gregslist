@@ -5,6 +5,8 @@ import ListingsContainer from "./ListingsContainer";
 function App() {
   const [list, setList] = useState([])
   const [onSearch, setSearch] = useState("")
+
+
   function handleSearch(e) {
     e.preventDefault();
     setSearch(e.target.value)

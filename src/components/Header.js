@@ -14,6 +14,7 @@ function Header({ onSearch, handleSearch }) {
       <Search onSearch={onSearch}
         handleSearch={handleSearch}
       />
+
     </header>
   );
 }
