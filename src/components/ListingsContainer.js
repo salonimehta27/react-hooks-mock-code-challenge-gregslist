@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ListingCard from "./ListingCard";
+import Form from "./Form"
 
 function ListingsContainer({ list, setList, onSearch }) {
   const [locationSort, setLocationSort] = useState(false)
+
 
   function handleDeleteFunction(id) {
     fetch(`http://localhost:6001/listings/${id}`, {
@@ -14,6 +16,11 @@ function ListingsContainer({ list, setList, onSearch }) {
     setList(() => list.filter(i => i.id !== id))
   }
 
+  function handleAddListing(newLists) {
+    const updatedList = [newLists, ...list];
+    setList(updatedList);
+  }
+
   useEffect(() => {
     fetch("http://localhost:6001/listings")
       .then(resp => resp.json())
@@ -21,7 +28,7 @@ function ListingsContainer({ list, setList, onSearch }) {
   }, [setList])
 
   const filterLists = list.filter(newList => newList.description.toLowerCase().includes(onSearch.toLowerCase()))
-    .sort((a, b) => locationSort ? (a.location.toUpperCase() > b.location.toUpperCase()) ? 1 : ((b.location.toUpperCase() > a.location.toUpperCase()) ? -1 : 0) : null)
+    .sort((a, b) => locationSort ? (a.location.toLowerCase() > b.location.toLowerCase()) ? 1 : ((b.location.toUpperCase() > a.location.toUpperCase()) ? -1 : 0) : null)
     .map(elem => <ListingCard key={elem.id}
       description={elem.description}
       image={elem.image}
@@ -31,6 +38,7 @@ function ListingsContainer({ list, setList, onSearch }) {
 
   return (
     <main>
+      <Form onAddNewItem={handleAddListing} />
       <button onClick={() => setLocationSort(!locationSort)}>Sort Location alphabetically</button>
       <ul className="cards">
         {filterLists}
